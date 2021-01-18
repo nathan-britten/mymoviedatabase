@@ -1,0 +1,34 @@
+{
+  "watchlist": [
+    {
+      "movieId": 761053,
+      "userId": null,
+      "id": 1
+    },
+    {
+      "movieId": 724089,
+      "userId": null,
+      "id": 2
+    },
+    {
+      "movieId": 696374,
+      "userId": null,
+      "id": 3
+    },
+    {
+      "movieId": 238,
+      "userId": null,
+      "id": 4
+    },
+    {
+      "movieId": 278,
+      "userId": null,
+      "id": 5
+    },
+    {
+      "movieId": 19404,
+      "userId": null,
+      "id": 6
+    }
+  ]
+}

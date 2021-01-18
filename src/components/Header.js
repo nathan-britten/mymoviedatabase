@@ -9,14 +9,21 @@ class Header extends React.Component {
         <Link to="/" className="item">
           My Movie Database
         </Link>
+        <div className="ui  search item">
+          <div className="ui icon input">
+            <input type="text" className="prompt" placeholder="Search for a movie."/>
+            <i className="search icon"></i>
+          </div>
+          <div className="results"></div>
+        </div>
         <div className="right menu">
-          <Link to="/movie/mywatchlist" className="item">
+          <Link to="/movies/mywatchlist" className="item">
             My Watch List
           </Link>
-          <Link to="/movie/popular" className="item">
+          <Link to="/movies/popular" className="item">
             Most Popular
           </Link>
-          <Link to="/movie/toprated" className="item">
+          <Link to="/movies/toprated" className="item">
             Top Rated
           </Link>
           <div className="item">

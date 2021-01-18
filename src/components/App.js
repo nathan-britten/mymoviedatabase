@@ -1,9 +1,10 @@
 import React from 'react';
-import {Router, Route, Switch, Redirect } from 'react-router-dom';
+import {Router, Route, Redirect } from 'react-router-dom';
 
-import MovieList from './MovieList';
 import MovieSingle from './MovieSingle';
 import MovieWatchList from './MovieWatchList';
+import MoviesHolder from './MoviesHolder';
+
 import Header from './Header';
 
 import history from '../history';
@@ -14,16 +15,14 @@ const App = () => {
     <div className="holder">
       <Router history={history}>
         <Header/>
-        <Switch>
+
           <Route exact path='/'>
-            <Redirect to='/movie' />
+            <Redirect to='/movies/popular' />
           </Route>
-          <Route path='/movie' exact component={MovieList}/>
-          <Route path='/movie/popular' exact component={MovieList}/>
-          <Route path='/movie/toprated' exact component={MovieList}/>
-          <Route path='/movie/:id' exact component={MovieSingle}/>
+          <Route path='/movies/popular' exact component={MoviesHolder}/>
+          <Route path='/movies/toprated' exact component={MoviesHolder}/>
+          <Route path='/movies/single/:id' exact component={MovieSingle}/>
           <Route path='/mywatchlist' exact component={MovieWatchList}/>
-        </Switch>
       </Router>
     </div>
   )
