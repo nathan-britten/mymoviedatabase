@@ -1,37 +1,52 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchMovies } from '../actions';
+import { fetchMovies, fetchWatchList, deleteState, fetchWatchListMovies } from '../actions';
 
 import MovieList from './MovieList';
+import SearchBar from './SearchBar';
 
 class MoviesHolder extends React.Component {
 
   componentDidMount() {
-    let listType = 'popular';
-    if(this.props.match.path === '/movies/popular') {
-      listType = 'popular';
+    let listType = '';
+    if(this.props.match.path !== '/movies/mywatchlist') {
+      this.props.fetchMovies(this.props.match.path)
     }
-    if(this.props.match.path === '/movies/toprated') {
-      listType = 'top_rated';
+
+    if(this.props.match.path === '/movies/mywatchlist') {
+      this.props.fetchWatchList(this.props.userid).then(() => {
+        this.props.watchlist.forEach(el => {
+          this.props.fetchWatchListMovies(el.movieId)
+        })
+      });
     }
-    this.props.fetchMovies(listType)
-    console.log("MOVIE HOLDER FIRST RENDER")
+
   }
 
 
   render() {
     return(
-      <div className="ui container">
-        <MovieList/>
-      </div>
+      <React.Fragment>      
+        <SearchBar />
+        <div className="ui container">
+          <MovieList currentUrl={this.props.match.path}/>
+        </div>
+      </React.Fragment>
     )
+  }
+
+  componentWillUnmount() {
+ 
+    this.props.deleteState(this.props.movie)
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
+
   return {
-    movies: state.movies.movies,
+    watchlist: Object.values(state.watchlist),
+    userid: state.auth.userId
   }
 }
 
-export default connect(mapStateToProps, { fetchMovies })(MoviesHolder);
+export default connect(mapStateToProps, { fetchMovies, fetchWatchList, deleteState, fetchWatchListMovies })(MoviesHolder);

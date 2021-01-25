@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ADD_TO_WATCHLIST, DELETE_FROM_WATCHLIST, FETCH_WATCHLIST} from '../actions/types';
+import { ADD_TO_WATCHLIST, DELETE_FROM_WATCHLIST, FETCH_WATCHLIST, DELTE_WATCHLIST} from '../actions/types';
 
 
 
@@ -16,6 +16,8 @@ const movie = (state = INITIAL_STATE, action) => {
       return {...state, [action.payload.movieId] : action.payload }
     case DELETE_FROM_WATCHLIST: 
       return _.omit(state, action.payload.movieId)
+    case DELTE_WATCHLIST:
+      return state = INITIAL_STATE;
     default: 
     return state;
   }

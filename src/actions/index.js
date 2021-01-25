@@ -1,7 +1,8 @@
 import movies from '../apis/moviedatabase';
 import watchlist from '../apis/watchlist';
+import youtube from '../apis/youtube';
 
-import { SIGN_IN, SIGN_OUT, FETCH_MOVIES, FETCH_MOVIE, FETCH_CREDITS, DELETE_STATE, ADD_TO_WATCHLIST, FETCH_WATCHLIST, DELETE_FROM_WATCHLIST } from './types';
+import { SIGN_IN, SIGN_OUT, FETCH_MOVIES, FETCH_MOVIE, FETCH_CREDITS, DELETE_SINGLE_MOVIE_STATE, ADD_TO_WATCHLIST, FETCH_WATCHLIST, DELETE_FROM_WATCHLIST, FETCH_WATCHLIST_MOVIES, DELETE_WATCHLIST_ITEM_FROM_MOVIES, FETCH_SEARCH_RESULTS, SET_TO_SHOW, DELTE_WATCHLIST, FETCH_TRAILER } from './types';
 
 export const signIn = (userId) => {
   return {
@@ -10,60 +11,86 @@ export const signIn = (userId) => {
   }
 }
 
-export const signOut = () => {
+export const signOut = ()  => async (dispatch) => {
+  dispatch({
+    type: DELTE_WATCHLIST,
+  })
   return {
     type: SIGN_OUT
   }
 }
 
-export const fetchMovies = (listType) => async (dispatch) => {
-  const response = await movies.get(`${listType}`);
+export const fetchMovies = (pageToFetch) => async (dispatch) => {
+  let listType = '';
+  if(pageToFetch === '/movies/popular') {
+    listType = 'popular';
+  }
+  if(pageToFetch === '/movies/toprated') {
+    listType = 'top_rated';
+  }
+
+  const response = await movies.get(`/movie/${listType}`);
+
   dispatch({
     type: FETCH_MOVIES,
-    payload: response.data
+    payload: response.data.results
   })
 }
 
-export const fetchMovie = (id) => async (dispatch) => {
-  const movieresponse = await movies.get(`${id}`);
+export const fetchMovie = (id, title) => async (dispatch) => {
+  const movieresponse = await movies.get(`/movie/${id}`);
   dispatch({
     type: FETCH_MOVIE,
     payload: movieresponse.data
   })
 
-  const creditsresponse = await movies.get(`/${id}/credits`);
+  const creditsresponse = await movies.get(`/movie/${id}/credits`);
   dispatch({
     type: FETCH_CREDITS,
     payload: creditsresponse.data
   })
+
+  const key = 'AIzaSyBeVwb3Jq1xhzs3geY5-yNHMtupcleyP2Q';
+  const searchterm = title + ' trailer';
+  const trailerresponse = await youtube.get(`search?q=${searchterm}&key=${key}`)
+  dispatch({
+    type: FETCH_TRAILER,
+    payload: trailerresponse.data.items[0].id.videoId
+  })
 }
+
 
 export const deleteState = (movie) => async (dispatch) => {
-  console.log(movie)
   dispatch({
-    type: DELETE_STATE,
+    type: DELETE_SINGLE_MOVIE_STATE,
     payload: movie
   })
-
 }
 
-export const addToWatchList = (movieId) => async (dispatch, getState) => {
+export const addToWatchList = (movieId, movieTitle) => async (dispatch, getState) => {
   const { userId } = getState().auth;
- 
-  const response = await watchlist.post('/watchlist', {movieId, userId})
+  const response = await watchlist.post('/watchlist', {movieId, userId, movieTitle})
   dispatch({
     type: ADD_TO_WATCHLIST,
     payload: response.data
   })
 }
 
-export const fetchWatchList = () => async (dispatch) => {
+export const fetchWatchList = (userid) => async (dispatch) => {
   const response = await watchlist.get('/watchlist');
+  let results = response.data
+  let filtereddata = results.filter(result => result.userId === userid)
+
   dispatch({
     type: FETCH_WATCHLIST,
-    payload: response.data
+    payload: filtereddata
   })
-  console.log('finished fetching')
+}
+
+export const clearWatchListState = () => async (dispatch) => {
+  dispatch({
+    type: DELTE_WATCHLIST
+    })
 }
 
 export const deleteWatchListItem = (movie) => (dispatch) => {
@@ -72,6 +99,38 @@ export const deleteWatchListItem = (movie) => (dispatch) => {
     type: DELETE_FROM_WATCHLIST,
     payload: movie
   })
-  console.log('finished deleting')
+}
+
+export const fetchWatchListMovies = (id) => async (dispatch) => {
+
+  const response = await movies.get(`/movie/${id}`);
+
+  dispatch({
+    type: FETCH_WATCHLIST_MOVIES,
+    payload: response.data
+  })
+}
+
+export const deleteWatchListItemFromMovies = (id) => async (dispatch) => {
+  dispatch({
+    type: DELETE_WATCHLIST_ITEM_FROM_MOVIES,
+    payload: id
+  })
+}
+
+export const fetchSearchResults = (query) => async (dispatch) => {
+  const response = await movies.get('/search/movie', {params: {'query': query, 'video': 'false', include_adult: 'false' }});
+  dispatch({
+    type: FETCH_SEARCH_RESULTS,
+    payload: response.data.results
+  })
+
+}
+
+export const setToShow = (currentstate) => async (dispatch) => {
+  dispatch({
+    type: SET_TO_SHOW,
+    payload: currentstate
+  })
 
 }

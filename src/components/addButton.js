@@ -1,21 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWatchList, addToWatchList, deleteWatchListItem } from '../actions';
+import { fetchWatchList, addToWatchList, deleteWatchListItem, deleteWatchListItemFromMovies } from '../actions';
 
 class addButton extends React.Component {
   
-  submitToWatchlist = (movieid) => {
-    this.props.addToWatchList(movieid)
+  submitToWatchlist = (movieid, movietitle) => {
+    this.props.addToWatchList(movieid, movietitle)
   }
 
-  removeFromWatchList = (movieid) => {
-    this.props.deleteWatchListItem(movieid)
-  
+  removeFromWatchList = (movie) => {
+    this.props.deleteWatchListItem(movie)
+    this.props.deleteWatchListItemFromMovies(movie)
   }
 
   createButton = () => {
-
-    let inWatchList = false;
     
     if(!this.props.watchList) {
       return ''
@@ -28,7 +26,7 @@ class addButton extends React.Component {
     }
 
       return(
-        <div className="ui button green" onClick={() => this.submitToWatchlist(this.props.movieid)}>Add to Watchlist</div>
+        <div className="ui button green" onClick={() => this.submitToWatchlist(this.props.movieid, this.props.movietitle)}>Add to Watchlist</div>
       )
   }
 
@@ -43,11 +41,11 @@ class addButton extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  // console.log(state.watchlist)
   return {
     movies: state.movies.movies,
-    watchList: state.watchlist
+    watchList: state.watchlist,
+ 
   }
 }
 
-export default connect(mapStateToProps, { fetchWatchList, addToWatchList, deleteWatchListItem })(addButton);
+export default connect(mapStateToProps, { fetchWatchList, addToWatchList, deleteWatchListItem, deleteWatchListItemFromMovies })(addButton);

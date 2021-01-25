@@ -4,28 +4,41 @@ import {Router, Route, Redirect } from 'react-router-dom';
 import MovieSingle from './MovieSingle';
 import MovieWatchList from './MovieWatchList';
 import MoviesHolder from './MoviesHolder';
+import PrivateRoute from './PrivateRoute';
 
 import Header from './Header';
-
 import history from '../history';
+import {connect} from 'react-redux';
 
-const App = () => {
+class App extends React.Component {
 
-  return( 
-    <div className="holder">
-      <Router history={history}>
-        <Header/>
-
-          <Route exact path='/'>
+  render() {
+    return( 
+      <div className="holder">
+        <Router history={history}>
+          <Header urls={history}/>
+          <Route exact path={'/'}>
             <Redirect to='/movies/popular' />
           </Route>
           <Route path='/movies/popular' exact component={MoviesHolder}/>
           <Route path='/movies/toprated' exact component={MoviesHolder}/>
           <Route path='/movies/single/:id' exact component={MovieSingle}/>
-          <Route path='/mywatchlist' exact component={MovieWatchList}/>
-      </Router>
-    </div>
-  )
+          <PrivateRoute 
+            path='/movies/mywatchlist'
+            exact
+            component={MovieWatchList}
+            isAuthenticated={this.props.issignedin}
+          />
+        </Router>
+      </div>
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    issignedin: state.auth.isSignedIn
+  }
+}
+
+export default connect(mapStateToProps)(App);

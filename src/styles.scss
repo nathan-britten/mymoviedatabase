@@ -1,0 +1,140 @@
+$col-sm: 576px; //col-sm
+$col-md: 768px; //col-md
+$col-lg: 992px; //col-lg
+$col-xl: 1200px; //
+
+
+.searchbar {
+  .input {
+    width: 100%;
+  }
+}
+.logo-holder {
+  text-align: center;
+  .logo {
+    max-width: 150px!important;
+    padding: 10px 0;
+  }
+}
+
+
+.ui.vertical.menu {
+  width: 100%;
+  text-align: center;
+}
+.pointer.menu {
+  .search.item {
+    min-width: auto;
+
+    justify-content: center;
+    .searchbar {
+      width: 100%;
+
+      & > .twelve.wide.column {
+        width: 100%!important;
+      }
+    }
+  }
+}
+
+.ui.cards {
+  .extra.content.addbutton {
+    animation: easyentry .5s linear;
+  }
+}
+
+@keyframes easyentry {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+.singlemovie-holder {
+  .poster {
+    & > img, .placeholder {
+      width: 100%;
+      border-radius: 10px;
+    }
+  }
+
+  .title-holder {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    .CircularProgressbar {
+      max-width: 100px;
+    }
+    h2 {
+      margin: 0
+    }
+    
+  }
+
+  .film-information {
+    font-size: 1.1rem;
+    padding: 1.5rem !important;
+    color: white;
+    h4 {
+      margin: 0;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .film-meta {
+      margin-bottom: 10px;
+      color: white;
+      .item {
+        color: inherit;
+        font-weight: bold;
+        font-size: 1.1rem;
+        &:before {
+          color: white!important;
+        }
+      }
+    }
+  }
+
+  .movie-overview {
+    margin-bottom: 40px;
+  }
+
+  .slider-container {
+    padding-bottom: 100px;
+    padding-top: 50px;
+    .slick-slide > div {
+      padding: 10px;
+    }
+    .slider > h2 {
+      padding: 10px;
+    }
+
+    .image {
+        height: 334px;
+    }
+
+
+
+  }
+
+  .ui.stackable.grid {
+    margin-left: 0 !important;
+    @media (min-width: $col-lg) {
+      margin-left: -1rem !important;
+    }
+    
+  }
+}
+
+.ui.page.modals {
+  .modal {
+    text-align: center;
+    max-width: 80vw;
+    .header {
+      text-align: left;
+    }
+
+    iframe {
+      padding: 30px;
+      max-width: 100%;
+    }
+  }
+}
+
