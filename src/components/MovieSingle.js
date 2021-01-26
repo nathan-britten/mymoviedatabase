@@ -54,7 +54,7 @@ class MovieSingle extends React.Component {
   RenderYoutube() {
     return (
       <iframe id="player" title='Trailer Container' type="text/html" width="640" height="390"
-      src={`http://www.youtube.com/embed/${this.props.trailer}`}
+      src={`https://www.youtube.com/embed/${this.props.trailer}`}
       frameBorder="0" allowFullScreen="allowfullscreen"></iframe>
     )
  
