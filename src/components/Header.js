@@ -46,12 +46,6 @@ class Header extends React.Component {
                 <GoogleAuth />
           </div>
               {this.renderSearch()}
-              
-
-
- 
-        
-          
         </div>
       )
     }

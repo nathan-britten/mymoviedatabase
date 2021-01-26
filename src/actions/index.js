@@ -4,21 +4,18 @@ import youtube from '../apis/youtube';
 
 import { SIGN_IN, SIGN_OUT, FETCH_MOVIES, FETCH_MOVIE, FETCH_CREDITS, DELETE_SINGLE_MOVIE_STATE, ADD_TO_WATCHLIST, FETCH_WATCHLIST, DELETE_FROM_WATCHLIST, FETCH_WATCHLIST_MOVIES, DELETE_WATCHLIST_ITEM_FROM_MOVIES, FETCH_SEARCH_RESULTS, SET_TO_SHOW, DELTE_WATCHLIST, FETCH_TRAILER } from './types';
 
-export const signIn = (userId) => {
+export const signIn = userId => {
   return {
-    type:  SIGN_IN,
+    type: SIGN_IN,
     payload: userId
-  }
-}
+  };
+};
 
-export const signOut = ()  => async (dispatch) => {
-  dispatch({
-    type: DELTE_WATCHLIST,
-  })
+export const signOut = () => {
   return {
     type: SIGN_OUT
-  }
-}
+  };
+};
 
 export const fetchMovies = (pageToFetch) => async (dispatch) => {
   let listType = '';
