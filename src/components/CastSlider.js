@@ -59,7 +59,7 @@ export default class Responsive extends Component {
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 4,
-      initialSlide: 1,
+      initialSlide: 0,
       transformEnabled: false,
       responsive: [
         {
