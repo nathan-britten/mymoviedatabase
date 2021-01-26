@@ -59,7 +59,7 @@ export default class Responsive extends Component {
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 4,
-      initialSlide: 1,
+      initialSlide: 2,
       responsive: [
         {
           breakpoint: 1024,
@@ -75,7 +75,7 @@ export default class Responsive extends Component {
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
-            initialSlide: 2
+            initialSlide: 4
           }
         },
         {
