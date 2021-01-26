@@ -23,6 +23,7 @@ $col-xl: 1200px; //
   text-align: center;
 }
 .pointer.menu {
+  margin-bottom: 0;
   .search.item {
     min-width: auto;
 
@@ -107,7 +108,9 @@ $col-xl: 1200px; //
     }
 
     .image {
+      img{
         height: 334px;
+      }
     }
 
 
