@@ -6,14 +6,23 @@ class GoogleAuth extends React.Component {
 
   componentDidMount() {
     //load must have a callback but init does not. That is why we need the .then()
+    console.log('here')
     window.gapi.load('client:auth2', () => {
+        console.log('here2')
       window.gapi.client.init({
         clientId: '19603894718-01vlr3v3u373pv6l3ut2hdepqsptna2c.apps.googleusercontent.com',
         scope: 'email'
       }).then(() => {
+                console.log('here3')
+
         this.auth = window.gapi.auth2.getAuthInstance();
+        console.log('here4')
         this.onAuthChange(this.auth.isSignedIn.get());
+        console.log('here5')
+
         this.auth.isSignedIn.listen(this.onAuthChange)
+        console.log('here6')
+
       })
     });
   }
