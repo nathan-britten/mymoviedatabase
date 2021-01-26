@@ -21,7 +21,7 @@ export default class Responsive extends Component {
     }
     return this.props.cast.map((castmember,index) => {
       if(index > 20) {
-        return;
+        return '';
       }
       return (
         <div className="ui card">

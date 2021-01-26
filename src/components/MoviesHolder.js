@@ -8,7 +8,6 @@ import SearchBar from './SearchBar';
 class MoviesHolder extends React.Component {
 
   componentDidMount() {
-    let listType = '';
     if(this.props.match.path !== '/movies/mywatchlist') {
       this.props.fetchMovies(this.props.match.path)
     }

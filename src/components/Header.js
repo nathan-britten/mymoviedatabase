@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import GoogleAuth from './GoogleAuth';
 import SearchBar from './SearchBar';
-import { setToShow } from '../actions';
 
 class Header extends React.Component {
 
@@ -25,8 +24,8 @@ class Header extends React.Component {
         My Watch List
         </Link>
       )
-      return '';
     }
+    return '';
   }
 
   render() {
@@ -87,4 +86,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { setToShow })(Header);
+export default connect(mapStateToProps)(Header);

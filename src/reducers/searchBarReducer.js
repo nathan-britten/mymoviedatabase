@@ -1,8 +1,4 @@
-import _ from 'lodash';
-import { FETCH_SEARCH_RESULTS, SET_SEARCH_TERM, SET_TO_SHOW } from '../actions/types';
-
-
-
+import { FETCH_SEARCH_RESULTS, SET_TO_SHOW } from '../actions/types';
 
 const INITIAL_STATE = {
   results: {},

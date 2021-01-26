@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWatchList, addToWatchList, deleteWatchListItem, deleteWatchListItemFromMovies } from '../actions';
+import { addToWatchList, deleteWatchListItem, deleteWatchListItemFromMovies } from '../actions';
 
 class addButton extends React.Component {
   
@@ -48,4 +48,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchWatchList, addToWatchList, deleteWatchListItem, deleteWatchListItemFromMovies })(addButton);
+export default connect(mapStateToProps, { addToWatchList, deleteWatchListItem, deleteWatchListItemFromMovies })(addButton);

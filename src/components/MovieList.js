@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchMovies, addToWatchList, fetchWatchList } from '../actions';
 
 import AddButton from './addButton';
 
@@ -60,12 +59,12 @@ class MovieList extends React.Component {
 
   renderList = () => {
     
-    if(!this.props.movies || this.props.movies.length == 0) {
+    if(!this.props.movies || this.props.movies.length === 0) {
       return '' ;
     }
     return this.props.movies.map(movie => {
       if(!movie.overview) {
-        return;
+        return '';
       }
       return (
         <React.Fragment key={movie.id}>
@@ -96,4 +95,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchMovies, addToWatchList, fetchWatchList })(MovieList);
+export default connect(mapStateToProps)(MovieList);

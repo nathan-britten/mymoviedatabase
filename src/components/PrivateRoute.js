@@ -1,6 +1,5 @@
-import { LocalPrintshopSharp } from '@material-ui/icons';
-import React, {Component} from 'react';
-import {Router, Route, Redirect } from 'react-router-dom';
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
 
 const PrivateRoute = ({component: Component, isAuthenticated, ...rest }) => { 
