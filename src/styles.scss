@@ -11,8 +11,11 @@ $col-xl: 1200px; //
 }
 .logo-holder {
   text-align: center;
+  @media (min-width: $col-lg) {
+    padding-left: 30px;
+  }
   .logo {
-    max-width: 150px!important;
+    width: 150px!important;
     padding: 10px 0;
   }
 }
@@ -23,7 +26,7 @@ $col-xl: 1200px; //
   text-align: center;
 }
 .pointer.menu {
-  margin-bottom: 0;
+  
   .search.item {
     min-width: auto;
 
@@ -50,6 +53,7 @@ $col-xl: 1200px; //
 }
 
 .singlemovie-holder {
+  margin-top: -1rem;
   .poster {
     & > img, .placeholder {
       width: 100%;
@@ -108,11 +112,21 @@ $col-xl: 1200px; //
     }
 
     .image {
+      animation: show .2s ease-in-out;
+      transition: all .3s ease-in-out;
       img{
         height: 334px;
       }
     }
+    @keyframes show {
+      from {opacity: 0}
+      to {opacity: 1}
+    }
 
+    .ui.card {
+      animation: show .5s ease-in-out;
+
+    }
 
 
   }

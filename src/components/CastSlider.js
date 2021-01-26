@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+import ReactCSSTransitionGroup from 'react-transition-group'; // ES6
+
 
 export default class Responsive extends Component {
   
@@ -24,7 +26,7 @@ export default class Responsive extends Component {
         return '';
       }
       return (
-        <div className="ui card">
+        <div className="ui card" key={castmember.name}>
           <div className="image">
             {this.renderImage(castmember)}
             
