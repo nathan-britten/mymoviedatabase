@@ -12,11 +12,14 @@ class MovieList extends React.Component {
     }
 
     return (
+      <React.Fragment>
       <div className="extra content addbutton">
         <span className="right floated">
           <AddButton movieid={movie.id} movietitle={movie.original_title}  />
         </span>
       </div>
+      <AddButton movieid={movie.id} movietitle={movie.original_title}  />
+      </React.Fragment>
     )
   }
 
