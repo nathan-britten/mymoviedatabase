@@ -23,6 +23,11 @@ $col-xl: 1200px; //
   }
 }
 
+.ui.two.column.grid {
+  & > .ui.button {
+    margin-left: 15px;
+  }
+}
 
 .ui.vertical.menu {
   width: 100%;

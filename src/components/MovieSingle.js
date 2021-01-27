@@ -59,6 +59,13 @@ class MovieSingle extends React.Component {
     )
  
   }
+
+  style() {
+    if(this.props.issignedin) {
+      return {marginLeft: "20px"}
+    }
+    return {}
+  }
   ModalExampleShorthand() {
 
       return (
@@ -67,6 +74,7 @@ class MovieSingle extends React.Component {
           header={this.props.movie.title + ' Trailer'}
           content={this.RenderYoutube()}
           actions={[{ key: 'done', content: 'Done', positive: false }]}
+          style={this.style()}
         />
       )
   }
