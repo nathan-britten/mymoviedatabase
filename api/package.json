@@ -2,13 +2,10 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "json-server --watch db.json --port 3001"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "json-server": "^0.16.2"
-  }
+  "license": "ISC"
 }

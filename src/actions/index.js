@@ -75,6 +75,9 @@ export const addToWatchList = (movieId, movieTitle) => async (dispatch, getState
 
 export const fetchWatchList = (userid) => async (dispatch) => {
   const response = await watchlist.get('/watchlist');
+  if(!response.ok)
+    throw new Error(response.statusText);
+    
   let results = response.data
   let filtereddata = results.filter(result => result.userId === userid)
 
