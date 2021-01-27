@@ -3,6 +3,9 @@ $col-md: 768px; //col-md
 $col-lg: 992px; //col-lg
 $col-xl: 1200px; //
 
+.holder {
+  overflow-x: hidden;
+}
 
 .searchbar {
   .input {

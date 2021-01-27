@@ -55,20 +55,14 @@ export default class Responsive extends Component {
   render() {
     var settings = {
       dots: true,
-      infinite: true,
-      speed: 500,
       slidesToShow: 4,
       slidesToScroll: 4,
-      initialSlide: 0,
-      transformEnabled: false,
       responsive: [
         {
           breakpoint: 1024,
           settings: {
             slidesToShow: 3,
             slidesToScroll: 3,
-            infinite: true,
-            dots: true
           }
         },
         {
@@ -76,14 +70,6 @@ export default class Responsive extends Component {
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
-            initialSlide: 4
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
           }
         }
       ]
@@ -93,8 +79,11 @@ export default class Responsive extends Component {
         <h2> Cast Memebers </h2>
         <TransitionGroup>
         <Slider {...settings}>
-          
+  
+
             {this.renderList()}
+
+            
           
         </Slider>
         </TransitionGroup>
