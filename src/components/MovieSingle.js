@@ -71,6 +71,13 @@ class MovieSingle extends React.Component {
       )
   }
 
+  renderButton = (movie) => {
+    if(this.props.issignedin) {
+      return <AddButton movieid={movie.id} movietitle={movie.original_title} />
+    }
+
+    return ''
+  }
   renderMovie = () => {
     if(!this.props.movie) {
       return ''
@@ -129,7 +136,7 @@ class MovieSingle extends React.Component {
                     </div>
                     <p className='movie-overview'>{movie.overview}</p>
                     <div className="ui two column grid">
-                      <AddButton movieid={movie.id} movietitle={movie.original_title} />
+                      {this.renderButton(movie)}
                       {this.ModalExampleShorthand()}
                     </div>
                   </div>
@@ -164,7 +171,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     movie: state.movies.singlemovie,
     cast: state.movies.singlemoviecast,
-    trailer: state.movies.trailerlink
+    trailer: state.movies.trailerlink,
+    issignedin: state.auth.isSignedIn
   }
 }
 export default connect(mapStateToProps, { fetchMovie, deleteState, setToShow})(MovieSingle);
