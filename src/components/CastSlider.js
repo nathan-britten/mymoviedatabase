@@ -4,9 +4,12 @@ import {TransitionGroup, CSSTransition} from 'react-transition-group'; // ES6
 
 
 export default class Responsive extends Component {
-  
+  state = {
+    windowsize: ''
+  }
   componentDidMount() {
-    console.log('cast rerender')
+    this.setState({windowsize: window.innerWidth})
+    window.addEventListener('resize', () => this.setState({windowsize: window.innerWidth}))
   }
   componentDidUpdate() {
     console.log('cast update')
@@ -53,27 +56,25 @@ export default class Responsive extends Component {
     }) 
   }
   render() {
-    var settings = {
-      dots: true,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-          }
-        },
-        {
-          breakpoint: 800,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-          }
-        }
-      ]
-    };
+    var settings;
+    if(this.state.windowsize < 800) {
+       settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 2,
+        slidesToScroll: 2
+      };
+    } else {
+      settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4
+      };
+    }
+
     return (
       <div className='slider'>
         <h2> Cast Memebers </h2>

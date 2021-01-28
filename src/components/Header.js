@@ -5,7 +5,13 @@ import GoogleAuth from './GoogleAuth';
 import SearchBar from './SearchBar';
 
 class Header extends React.Component {
-
+  state = {
+    windowsize: ''
+  }
+  componentDidMount() {
+    this.setState({windowsize: window.innerWidth})
+    window.addEventListener('resize', () => this.setState({windowsize: window.innerWidth}))
+  }
   renderSearch() {
     if (this.props.urls.location.pathname.includes('/movies/single')) {
       return (
@@ -31,7 +37,7 @@ class Header extends React.Component {
   }
 
   render() {
-    if(window.innerWidth < 900) {
+    if(this.state.windowsize < 900) {
       return (
         <div className="ui vertical menu">
           <Link to="/" className="logo-holder">
