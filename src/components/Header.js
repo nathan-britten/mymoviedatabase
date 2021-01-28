@@ -19,9 +19,11 @@ class Header extends React.Component {
 
   renderWatchListMenu() {
     if(this.props.issignedin) {
+      console.log(this.props.watchlist)
       return (
         <Link to="/movies/mywatchlist" className="item">
         My Watch List
+        <div className="ui label">{this.props.watchlist.length}</div>
         </Link>
       )
     }
@@ -76,7 +78,9 @@ class Header extends React.Component {
 const mapStateToProps = (state) => {
   return {
     searchresults: Object.values(state.search),
-    issignedin: state.auth.isSignedIn
+    issignedin: state.auth.isSignedIn,
+    watchlist: Object.values(state.watchlist),
+    userid: state.auth.userId
   }
 }
 

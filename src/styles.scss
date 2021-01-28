@@ -2,9 +2,14 @@ $col-sm: 576px; //col-sm
 $col-md: 768px; //col-md
 $col-lg: 992px; //col-lg
 $col-xl: 1200px; //
+html {
+  scroll-behavior: smooth;
+}
 
 .holder {
   overflow-x: hidden;
+  overflow-y: hidden;
+  padding-bottom: 50px;
 }
 
 .searchbar {
@@ -19,6 +24,7 @@ $col-xl: 1200px; //
   }
   .logo {
     width: 150px!important;
+    height: 65px;
     padding: 10px 0;
   }
 }
@@ -179,4 +185,18 @@ $col-xl: 1200px; //
 .example-exit.example-exit-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
+}
+
+.more-holder {
+  animation: show 2s ease-in-out;
+  text-align: center;
+  padding: 40px 0;
+
+  .morebutton {
+    margin: 0 5px;
+  }
+}
+
+.ui.button {
+  margin-right: 0;
 }

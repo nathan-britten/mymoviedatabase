@@ -5,6 +5,7 @@ import youtube from '../apis/youtube';
 import { SIGN_IN, SIGN_OUT, FETCH_MOVIES, FETCH_MOVIE, FETCH_CREDITS, DELETE_SINGLE_MOVIE_STATE, ADD_TO_WATCHLIST, FETCH_WATCHLIST, DELETE_FROM_WATCHLIST, FETCH_WATCHLIST_MOVIES, DELETE_WATCHLIST_ITEM_FROM_MOVIES, FETCH_SEARCH_RESULTS, SET_TO_SHOW, DELTE_WATCHLIST, FETCH_TRAILER } from './types';
 
 export const signIn = userId => {
+  
   return {
     type: SIGN_IN,
     payload: userId
@@ -19,19 +20,73 @@ export const signOut = () => {
 
 export const fetchMovies = (pageToFetch) => async (dispatch) => {
   let listType = '';
+  let response;
   if(pageToFetch === '/movies/popular') {
-    listType = 'popular';
+    listType = 'discover/movie';
+    response = await movies.get(`/${listType}`,{params: {
+      'video': 'false',
+      include_adult: 'false',
+      sort_by: 'popularity.desc',
+      with_original_language: 'en'
+    }});
   }
   if(pageToFetch === '/movies/toprated') {
-    listType = 'top_rated';
+    listType = 'discover/movie';
+    response = await movies.get(`/${listType}`,{params: {
+      'video': 'false',
+      include_adult: 'false',
+      sort_by: 'vote_average.desc',
+      with_original_language: 'en',
+      'vote_count.gte': '2000',
+      'vote_average.gte': '8'
+    }});
   }
-
-  const response = await movies.get(`/movie/${listType}`);
-
   dispatch({
     type: FETCH_MOVIES,
     payload: response.data.results
   })
+}
+
+
+export const fetchMoreMovies = (pageToFetch, page) => async (dispatch) => {
+  console.log(page)
+  console.log(pageToFetch)
+  let listType = '';
+  let response;
+  console.log('here')
+  if(pageToFetch === '/movies/popular') {
+    listType = 'discover/movie';
+    response = await movies.get(`/${listType}`,{params: {
+      'video': 'false',
+      include_adult: 'false',
+      sort_by: 'popularity.desc',
+      certification_country: 'en',
+      with_original_language: 'en',
+      page: page,
+    }});
+
+    dispatch({
+      type: FETCH_MOVIES,
+      payload: response.data.results
+    })
+  }
+  
+  if(pageToFetch === '/movies/toprated') {
+    listType = 'discover/movie';
+    response = await movies.get(`/${listType}`,{params: {
+      'video': 'false',
+      include_adult: 'false',
+      sort_by: 'vote_average.desc',
+      with_original_language: 'en',
+      'vote_count.gte': '2000',
+      'vote_average.gte': '8',
+      page: page,
+    }});
+    dispatch({
+      type: FETCH_MOVIES,
+      payload: response.data.results
+    })
+}
 }
 
 export const fetchMovie = (id, title) => async (dispatch) => {

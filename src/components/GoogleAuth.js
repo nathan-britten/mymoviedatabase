@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { signIn, signOut, clearWatchListState } from '../actions';
+import { signIn, signOut, clearWatchListState, fetchWatchList } from '../actions';
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -16,6 +16,8 @@ class GoogleAuth extends React.Component {
 
           this.onAuthChange(this.auth.isSignedIn.get());
           this.auth.isSignedIn.listen(this.onAuthChange);
+        }).then(() => {
+          this.props.fetchWatchList((this.props.userId))
         });
     });
   }
@@ -63,10 +65,13 @@ class GoogleAuth extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { isSignedIn: state.auth.isSignedIn };
+  return { 
+    isSignedIn: state.auth.isSignedIn,
+    userId: state.auth.userId
+   };
 };
 
 export default connect(
   mapStateToProps,
-  { signIn, signOut, clearWatchListState }
+  { signIn, signOut, clearWatchListState, fetchWatchList }
 )(GoogleAuth);

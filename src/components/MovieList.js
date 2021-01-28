@@ -70,7 +70,7 @@ class MovieList extends React.Component {
         <React.Fragment key={movie.id}>
 
           {this.renderItem(movie)}
-
+        
         </React.Fragment>
           
       )

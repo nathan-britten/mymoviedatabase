@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Button, Modal } from 'semantic-ui-react';
 import SimpleSlider from './CastSlider';
 
-import { fetchMovie, deleteState, setToShow} from '../actions';
+import { fetchMovie, deleteState, setToShow, fetchWatchList } from '../actions';
 import AddButton from './addButton';
 
 class MovieSingle extends React.Component {
@@ -17,6 +17,8 @@ class MovieSingle extends React.Component {
      phrase = this.props.location.state.movietitle;
     }
     this.props.fetchMovie(this.props.match.params.id, phrase)
+    console.log(this.props.id)
+    this.props.fetchWatchList(this.props.userid)
   }
 
   
@@ -180,7 +182,8 @@ const mapStateToProps = (state, ownProps) => {
     movie: state.movies.singlemovie,
     cast: state.movies.singlemoviecast,
     trailer: state.movies.trailerlink,
-    issignedin: state.auth.isSignedIn
+    issignedin: state.auth.isSignedIn,
+    userid: state.auth.userId
   }
 }
-export default connect(mapStateToProps, { fetchMovie, deleteState, setToShow})(MovieSingle);
+export default connect(mapStateToProps, { fetchMovie, deleteState, setToShow, fetchWatchList })(MovieSingle);
