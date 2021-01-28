@@ -20,6 +20,9 @@ class App extends React.Component {
           <Route exact path={'/'}>
             <Redirect to='/movies/popular' />
           </Route>
+          <Route exact path={'/movies'}>
+            <Redirect to='/movies/popular' />
+          </Route>
           <Route path='/movies/popular' exact component={MoviesHolder}/>
           <Route path='/movies/toprated' exact component={MoviesHolder}/>
           <Route path='/movies/single/:id' exact component={MovieSingle}/>
