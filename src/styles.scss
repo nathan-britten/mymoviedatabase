@@ -38,6 +38,10 @@ html {
 .ui.vertical.menu {
   width: 100%;
   text-align: center;
+
+  .ui.label {
+    float: none;
+  }
 }
 .pointer.menu {
   
